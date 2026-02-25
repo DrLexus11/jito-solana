@@ -479,13 +479,13 @@ mod tests {
         expected_fwd_addr: &SocketAddr,
     ) {
         assert_eq!(
-            cluster_info.my_contact_info().tpu(Protocol::UDP).unwrap(),
+            cluster_info.my_contact_info().tpu(Protocol::QUIC).unwrap(),
             *expected_addr
         );
         assert_eq!(
             cluster_info
                 .my_contact_info()
-                .tpu_forwards(Protocol::UDP)
+                .tpu_forwards(Protocol::QUIC)
                 .unwrap(),
             *expected_fwd_addr
         );
