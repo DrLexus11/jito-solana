@@ -532,7 +532,10 @@ mod bam_manager_tests {
         let dependencies = create_test_bam_dependencies(cluster_info, bank_forks);
         let bam_enabled = dependencies.bam_enabled.clone();
 
-        let bam_url = Arc::new(ArcSwap::from_pointee(Some(format!("http://{}", server.addr))));
+        let bam_url = Arc::new(ArcSwap::from_pointee(Some(format!(
+            "http://{}",
+            server.addr
+        ))));
         let identity_notifiers = Arc::new(RwLock::new(KeyUpdaters::default()));
 
         let _manager = BamManager::new(
@@ -568,7 +571,10 @@ mod bam_manager_tests {
         let dependencies = create_test_bam_dependencies(cluster_info, bank_forks);
         let bam_enabled = dependencies.bam_enabled.clone();
 
-        let bam_url = Arc::new(ArcSwap::from_pointee(Some(format!("http://{}", server.addr))));
+        let bam_url = Arc::new(ArcSwap::from_pointee(Some(format!(
+            "http://{}",
+            server.addr
+        ))));
         let identity_notifiers = Arc::new(std::sync::RwLock::new(KeyUpdaters::default()));
 
         let _manager = BamManager::new(
@@ -649,7 +655,10 @@ mod bam_manager_tests {
         let dependencies = create_test_bam_dependencies(cluster_info, bank_forks);
         let bam_enabled = dependencies.bam_enabled.clone();
 
-        let bam_url = Arc::new(ArcSwap::from_pointee(Some(format!("http://{}", server1.addr))));
+        let bam_url = Arc::new(ArcSwap::from_pointee(Some(format!(
+            "http://{}",
+            server1.addr
+        ))));
         let identity_notifiers = Arc::new(RwLock::new(KeyUpdaters::default()));
 
         let _manager = BamManager::new(
@@ -694,7 +703,10 @@ mod bam_manager_tests {
         let block_builder_fee_info = dependencies.block_builder_fee_info.clone();
         let bam_enabled = dependencies.bam_enabled.clone();
 
-        let bam_url = Arc::new(ArcSwap::from_pointee(Some(format!("http://{}", server.addr))));
+        let bam_url = Arc::new(ArcSwap::from_pointee(Some(format!(
+            "http://{}",
+            server.addr
+        ))));
         let identity_notifiers = Arc::new(RwLock::new(KeyUpdaters::default()));
 
         let _manager = BamManager::new(

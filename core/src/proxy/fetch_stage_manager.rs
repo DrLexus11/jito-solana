@@ -556,7 +556,6 @@ mod tests {
         }
     }
 
-
     #[test]
     fn test_original_to_relayer_and_back_switch() {
         let TestContext {
@@ -771,8 +770,7 @@ mod tests {
 
     #[test]
     fn test_bam_gossip_failure_reverts_state() {
-        use std::net::SocketAddr;
-        use std::str::FromStr;
+        use std::{net::SocketAddr, str::FromStr};
 
         let TestContext {
             bam_enabled,
@@ -798,6 +796,9 @@ mod tests {
         let prev_state = brain.current_tpu_state;
         let result = brain.state_machine_tick();
         assert!(!result, "Should return false on gossip failure");
-        assert_eq!(brain.current_tpu_state, prev_state, "State should revert to previous on gossip failure");
+        assert_eq!(
+            brain.current_tpu_state, prev_state,
+            "State should revert to previous on gossip failure"
+        );
     }
 }
