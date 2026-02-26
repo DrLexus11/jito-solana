@@ -82,12 +82,10 @@ impl FetchStageManager {
             .name("fetch-stage-manager".into())
             .spawn(move || {
                 // Save original TPU info
-                // yes, using UDP here is extremely confusing for the validator
-                // since the entire network is running QUIC. However, it's correct.
                 let original_tpu_info = (
-                    my_fallback_contact_info.tpu(Protocol::UDP).unwrap(),
+                    my_fallback_contact_info.tpu(Protocol::QUIC).unwrap(),
                     my_fallback_contact_info
-                        .tpu_forwards(Protocol::UDP)
+                        .tpu_forwards(Protocol::QUIC)
                         .unwrap(),
                 );
 
