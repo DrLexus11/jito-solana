@@ -176,6 +176,8 @@ pub struct JsonRpcConfig {
     pub max_request_body_size: Option<usize>,
     /// Disable the health check, used for tests and TestValidator
     pub disable_health_check: bool,
+    /// Maximum number of bytes written to the program log before truncation during simulation
+    pub log_messages_bytes_limit: Option<usize>,
 }
 
 impl Default for JsonRpcConfig {
@@ -196,6 +198,7 @@ impl Default for JsonRpcConfig {
             rpc_scan_and_fix_roots: Default::default(),
             max_request_body_size: Option::default(),
             disable_health_check: Default::default(),
+            log_messages_bytes_limit: Option::default(),
         }
     }
 }
@@ -3904,7 +3907,7 @@ pub mod rpc_full {
                 let simulation_result = if let Some(err) = verification_error {
                     TransactionSimulationResult::new_error(err)
                 } else {
-                    preflight_bank.simulate_transaction(&transaction, false)
+                    preflight_bank.simulate_transaction(&transaction, false, None)
                 };
 
                 if let TransactionSimulationResult {
@@ -4031,7 +4034,11 @@ pub mod rpc_full {
             let simulation_result = if let Some(err) = verification_error {
                 TransactionSimulationResult::new_error(err)
             } else {
-                bank.simulate_transaction(&transaction, enable_cpi_recording)
+                bank.simulate_transaction(
+                    &transaction,
+                    enable_cpi_recording,
+                    meta.config.log_messages_bytes_limit,
+                )
             };
 
             let TransactionSimulationResult {
@@ -4312,7 +4319,7 @@ pub mod rpc_full {
                 &transactions,
                 &pre_execution_accounts,
                 &post_execution_accounts,
-                Some(1_000),
+                meta.config.log_messages_bytes_limit,
             );
             let result = RpcSimulateBundleResult {
                 // if any of them errored out, return the first one that did

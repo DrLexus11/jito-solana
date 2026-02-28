@@ -3125,10 +3125,11 @@ impl Bank {
         &self,
         transaction: &impl TransactionWithMeta,
         enable_cpi_recording: bool,
+        log_messages_bytes_limit: Option<usize>,
     ) -> TransactionSimulationResult {
         assert!(self.is_frozen(), "simulation bank must be frozen");
 
-        self.simulate_transaction_unchecked(transaction, enable_cpi_recording)
+        self.simulate_transaction_unchecked(transaction, enable_cpi_recording, log_messages_bytes_limit)
     }
 
     /// Run transactions against a bank without committing the results; does not check if the bank
@@ -3137,6 +3138,7 @@ impl Bank {
         &self,
         transaction: &impl TransactionWithMeta,
         enable_cpi_recording: bool,
+        log_messages_bytes_limit: Option<usize>,
     ) -> TransactionSimulationResult {
         let account_keys = transaction.account_keys();
         let number_of_accounts = account_keys.len();
@@ -3159,7 +3161,7 @@ impl Bank {
             TransactionProcessingConfig {
                 account_overrides: Some(&account_overrides),
                 check_program_modification_slot: self.check_program_modification_slot,
-                log_messages_bytes_limit: None,
+                log_messages_bytes_limit,
                 limit_to_load_programs: true,
                 recording_config: ExecutionRecordingConfig {
                     enable_cpi_recording,

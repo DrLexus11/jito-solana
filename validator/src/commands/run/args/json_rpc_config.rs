@@ -55,6 +55,7 @@ impl FromClapArgMatches for JsonRpcConfig {
             rpc_scan_and_fix_roots: matches.is_present("rpc_scan_and_fix_roots"),
             max_request_body_size: Some(value_t!(matches, "rpc_max_request_body_size", usize)?),
             disable_health_check: false,
+            log_messages_bytes_limit: value_t!(matches, "log_messages_bytes_limit", usize).ok(),
         })
     }
 }

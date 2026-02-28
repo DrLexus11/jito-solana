@@ -199,7 +199,7 @@ fn simulate_transaction(
         post_balances: _,
         pre_token_balances: _,
         post_token_balances: _,
-    } = bank.simulate_transaction_unchecked(&sanitized_transaction, true);
+    } = bank.simulate_transaction_unchecked(&sanitized_transaction, true, None);
 
     let simulation_details = TransactionSimulationDetails {
         logs,
