@@ -42,3 +42,10 @@ log-*/
 
 .env
 docker-output/
+
+# Local build output and scripts
+/bin/
+/.crates.toml
+/.crates2.json
+/anchor/
+/jito-programs/
