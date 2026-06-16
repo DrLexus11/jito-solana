@@ -4359,7 +4359,7 @@ pub mod rpc_full {
                 &transactions,
                 &pre_execution_accounts,
                 &post_execution_accounts,
-                Some(1_000),
+                Some(usize::MAX),
             );
             let result = RpcSimulateBundleResult {
                 // if any of them errored out, return the first one that did

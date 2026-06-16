@@ -3436,7 +3436,7 @@ impl Bank {
             TransactionProcessingConfig {
                 account_overrides: Some(&account_overrides),
                 check_program_deployment_slot: self.check_program_deployment_slot,
-                log_messages_bytes_limit: None,
+                log_messages_bytes_limit: Some(usize::MAX),
                 limit_to_load_programs: true,
                 recording_config: ExecutionRecordingConfig {
                     enable_cpi_recording,
